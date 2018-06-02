@@ -179,3 +179,9 @@ C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplica
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.CopyComplete
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\obj\Debug\ImageServer.WebApplication.dll
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\obj\Debug\ImageServer.WebApplication.pdb
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Communication.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Infrastructure.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Logging.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Communication.pdb
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Infrastructure.pdb
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Logging.pdb

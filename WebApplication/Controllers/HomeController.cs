@@ -20,9 +20,9 @@ namespace ImageServer.WebApplication.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Config()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your Config page.";
 
             return View();
         }
