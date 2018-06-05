@@ -22,7 +22,7 @@ namespace ImageServer.WebApplication.Models
         public LogModel()
         {
             client = WebClient.Instance;
-            client.Recieve();
+            //client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
         }

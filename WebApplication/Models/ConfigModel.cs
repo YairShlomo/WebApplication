@@ -15,8 +15,9 @@ using ImageService.Infrastructure.Modal.Event;
 using ImageService.Communication;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using ImageService;
 
-namespace ImageServer.WebApplication.Models.Config
+namespace ImageServer.WebApplication.Models
 {
     public class ConfigModel
     {
@@ -24,8 +25,14 @@ namespace ImageServer.WebApplication.Models.Config
         private string m_outputDirectory;
         private string m_sourceName;
         private string m_logName;
-        private ObservableCollection<string> m_Handlers;
+        private Debug_program dp;
+
+        //private ObservableCollection<string> mHandlers;
         public event PropertyChangedEventHandler PropertyChanged;
+        public delegate void NotifyAboutChange();
+
+        public event NotifyAboutChange Notify;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingModel"/> class.
         /// </summary>
@@ -35,6 +42,7 @@ namespace ImageServer.WebApplication.Models.Config
             client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
+            
         }
         #region Notify Changed
 
@@ -61,7 +69,10 @@ namespace ImageServer.WebApplication.Models.Config
                 SourceName = string.Empty;
                 LogName = string.Empty;
                 TumbnailSize = string.Empty;
-                m_Handlers = new ObservableCollection<string>();
+                Handlers = new ObservableCollection<string>();
+                dp = new Debug_program();
+
+                //m_Handlers.Insert(0,"dfdsfs");
                 Object thisLock = new Object();
                 //BindingOperations.EnableCollectionSynchronization(Handlers, thisLock);
                 string[] Args = new string[5];
@@ -84,6 +95,8 @@ namespace ImageServer.WebApplication.Models.Config
             {
                 if (arrivedMessage != null)
                 {
+                    //dp.write("get to ExecuteReceived" + arrivedMessage.Args[0] +"\n");
+
                     switch (arrivedMessage.CommandID)
                     {
                         case (int)CommandEnum.GetConfigCommand:
@@ -111,6 +124,8 @@ namespace ImageServer.WebApplication.Models.Config
         {
             try
             {
+                dp.write("yey\n");
+
                 TcpMessages tcpMessages = JsonConvert.DeserializeObject<TcpMessages>(arrivedMessage.Args[0]);
                 OutputDirectory = tcpMessages.Args[0];
                 SourceName = tcpMessages.Args[1];
@@ -120,6 +135,16 @@ namespace ImageServer.WebApplication.Models.Config
                 {
                     Handlers.Add(tcpMessages.Args[i]);
                 }
+                int k = 0;
+                foreach(string item in Handlers)
+                {
+                    dp.write(k+":::::"+item+"\n");
+
+                }
+                Notify?.Invoke();
+
+
+
             }
             catch (Exception e)
             {
@@ -176,7 +201,7 @@ namespace ImageServer.WebApplication.Models.Config
         [Required]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Handlers")]
-        public ObservableCollection<string> Handlers { get; set; }
+        public ObservableCollection<string> Handlers { get; private set; }
     }
 
 }

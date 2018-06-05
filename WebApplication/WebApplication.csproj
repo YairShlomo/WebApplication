@@ -149,7 +149,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Communication\WebClient.cs" />
     <Compile Include="Communication\IWebClient.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Debug_program.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
