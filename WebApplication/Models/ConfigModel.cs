@@ -25,7 +25,7 @@ namespace ImageServer.WebApplication.Models
         private string m_outputDirectory;
         private string m_sourceName;
         private string m_logName;
-        private Debug_program dp;
+        //private Debug_program dp;
 
         //private ObservableCollection<string> mHandlers;
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,7 +70,7 @@ namespace ImageServer.WebApplication.Models
                 LogName = string.Empty;
                 TumbnailSize = string.Empty;
                 Handlers = new ObservableCollection<string>();
-                dp = new Debug_program();
+                //dp = new Debug_program();
 
                 //m_Handlers.Insert(0,"dfdsfs");
                 Object thisLock = new Object();
@@ -124,7 +124,7 @@ namespace ImageServer.WebApplication.Models
         {
             try
             {
-                dp.write("yey\n");
+                //dp.write("yey\n");
 
                 TcpMessages tcpMessages = JsonConvert.DeserializeObject<TcpMessages>(arrivedMessage.Args[0]);
                 OutputDirectory = tcpMessages.Args[0];
@@ -138,7 +138,7 @@ namespace ImageServer.WebApplication.Models
                 int k = 0;
                 foreach(string item in Handlers)
                 {
-                    dp.write(k+":::::"+item+"\n");
+                   // dp.write(k+":::::"+item+"\n");
 
                 }
                 Notify?.Invoke();
@@ -199,7 +199,7 @@ namespace ImageServer.WebApplication.Models
         public string TumbnailSize { get; set; }
 
         [Required]
-        [DataType(DataType.PhoneNumber)]
+        [DataType(DataType.Text)]
         [Display(Name = "Handlers")]
         public ObservableCollection<string> Handlers { get; private set; }
     }

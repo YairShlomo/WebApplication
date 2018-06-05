@@ -29,7 +29,7 @@ namespace ImageServer.WebApplication
         public event ExecuteReceivedMessage ExecuteReceived;
         BinaryReader reader;
         BinaryWriter writer;
-        private Debug_program debug;
+       // private Debug_program debug;
 
         private WebClient()
         {
@@ -43,7 +43,7 @@ namespace ImageServer.WebApplication
                 writer = new BinaryWriter(stream);
                 reader = new BinaryReader(stream);
                 Console.WriteLine("You are connected");
-                debug = new Debug_program();
+                //debug = new Debug_program();
 
             }
             catch (Exception ex)
@@ -74,11 +74,11 @@ namespace ImageServer.WebApplication
                     if (Connected)
                     {
                         Console.WriteLine($"Sendbeforejson {commandRecievedEventArgs.RequestDirPath} to Server");
-                        debug.write($"Sendbeforejson {commandRecievedEventArgs.RequestDirPath} to Server");
+                       // debug.write($"Sendbeforejson {commandRecievedEventArgs.RequestDirPath} to Server");
                         string jsonCommand = JsonConvert.SerializeObject(commandRecievedEventArgs);
                         // Send data to server
                         Console.WriteLine($"Send {jsonCommand} to Server");
-                         debug.write("send from Guiclient" + jsonCommand + "\n");
+                        // debug.write("send from Guiclient" + jsonCommand + "\n");
                         mutex.WaitOne();
                         writer.Write(jsonCommand);
                         mutex.ReleaseMutex();
@@ -99,14 +99,14 @@ namespace ImageServer.WebApplication
                 try
                 {
                     Console.WriteLine("Recived"+ Connected);
-                    debug.write("Recived" + Connected);
+                  //  debug.write("Recived" + Connected);
 
                     while (Connected)
                     {
-                        debug.write("recive web client\n");
+                        //debug.write("recive web client\n");
                         Console.WriteLine("recive web client\n");
                         string jsonArrivedMessage = reader.ReadString();
-                        debug.write($"Recieve {jsonArrivedMessage} from Server");
+                       // debug.write($"Recieve {jsonArrivedMessage} from Server");
 
                         // Debug.WriteLine("recived client:" + jsonArrivedMessage + "\n");
                         Console.WriteLine($"Recieve {jsonArrivedMessage} from Server");
