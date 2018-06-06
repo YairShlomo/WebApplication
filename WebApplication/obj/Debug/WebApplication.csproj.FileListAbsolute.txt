@@ -185,3 +185,11 @@ C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplica
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Communication.pdb
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Infrastructure.pdb
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\ImageServer.Logging.pdb
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\Flurl.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\System.Net.Http.Extensions.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\System.Net.Http.Primitives.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\Twixel.dll
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\System.Net.Http.Extensions.xml
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\System.Net.Http.Primitives.xml
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\bin\Twixel.xml
+C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\WebApplication\obj\Debug\WebApplication.csproj.App.config

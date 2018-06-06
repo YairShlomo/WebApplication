@@ -69,13 +69,17 @@ namespace ImageServer.WebApplication.Models
             try
             {
                Logs= new ObservableCollection<Log>();
-                Object thisLock = new Object();
-                //BindingOperations.EnableCollectionSynchronization(logs, thisLock);
+                Object mutexWrite = new Object();
+                //BindingOperations.EnableCollectionSynchronization(logs, mutexWrite);
                 string[] Args = new string[5];
                 CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, Args, "");
                 Console.WriteLine((int)commandRecievedEventArgs.CommandID + "\n");
-                client.Send(commandRecievedEventArgs);
-               // debug.write("InitData\n");
+                lock (mutexWrite)
+                {
+                    client.Send(commandRecievedEventArgs);
+
+                }
+                // debug.write("InitData\n");
             }
             catch (Exception ex)
             {

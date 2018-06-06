@@ -10,15 +10,15 @@ namespace ImageServer.WebApplication.Controllers
 {
     public class ConfigController :Controller
     {
-        private Debug_program debug;
+        //private Debug_program debug;
         private static string handlerToDelete;
 
         static ConfigModel config = new ConfigModel();
 
         public ConfigController()
         {
-            debug = new Debug_program();
-            debug.write("ConfigController\n");
+            //debug = new Debug_program();
+           // debug.write("ConfigController\n");
             config.Notify -= Notify;
             config.Notify += Notify;
         }
@@ -49,7 +49,7 @@ namespace ImageServer.WebApplication.Controllers
 
 
         // GET: Config/DeleteHandler/
-        public ActionResult DeleteHandler(string toDeleteHandler)
+        public ActionResult HandlerDeletion(string toDeleteHandler)
         {
             
             handlerToDelete = toDeleteHandler;

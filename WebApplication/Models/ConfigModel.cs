@@ -32,6 +32,7 @@ namespace ImageServer.WebApplication.Models
         public delegate void NotifyAboutChange();
 
         public event NotifyAboutChange Notify;
+        Object mutexWrite;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SettingModel"/> class.
@@ -73,11 +74,15 @@ namespace ImageServer.WebApplication.Models
                 //dp = new Debug_program();
 
                 //m_Handlers.Insert(0,"dfdsfs");
-                Object thisLock = new Object();
-                //BindingOperations.EnableCollectionSynchronization(Handlers, thisLock);
+                mutexWrite = new Object();
+                //BindingOperations.EnableCollectionSynchronization(Handlers, mutexWrite);
                 string[] Args = new string[5];
                 CommandRecievedEventArgs request = new CommandRecievedEventArgs((int)CommandEnum.GetConfigCommand, Args, "");
-                client.Send(request);
+                lock (mutexWrite)
+                {
+                    client.Send(request);
+
+                }
             }
             catch (Exception ex)
             {
@@ -96,7 +101,6 @@ namespace ImageServer.WebApplication.Models
                 if (arrivedMessage != null)
                 {
                     //dp.write("get to ExecuteReceived" + arrivedMessage.Args[0] +"\n");
-
                     switch (arrivedMessage.CommandID)
                     {
                         case (int)CommandEnum.GetConfigCommand:
@@ -109,9 +113,6 @@ namespace ImageServer.WebApplication.Models
                             //client.Close();
                             break;
                     }
-                    Notify?.Invoke();
-
-
                 }
             }
             catch (Exception ex)
@@ -128,8 +129,8 @@ namespace ImageServer.WebApplication.Models
             try
             {
                 //dp.write("yey\n");
-
                 TcpMessages tcpMessages = JsonConvert.DeserializeObject<TcpMessages>(arrivedMessage.Args[0]);
+
                 OutputDirectory = tcpMessages.Args[0];
                 SourceName = tcpMessages.Args[1];
                 LogName = tcpMessages.Args[2];
@@ -144,6 +145,7 @@ namespace ImageServer.WebApplication.Models
                    // dp.write(k+":::::"+item+"\n");
 
                 }
+                Notify?.Invoke();
 
 
 
@@ -176,7 +178,14 @@ namespace ImageServer.WebApplication.Models
             Console.WriteLine(handler);
             string[] Args = { handler };
             CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.CloseHandlerCommand, Args, handler);
-            client.Send(commandRecievedEventArgs);
+            mutexWrite = new Object();
+
+            lock (mutexWrite)
+            {
+                client.Send(commandRecievedEventArgs);
+
+
+            }
         }
         //members
         [Required]
