@@ -109,6 +109,9 @@ namespace ImageServer.WebApplication.Models
                             //client.Close();
                             break;
                     }
+                    Notify?.Invoke();
+
+
                 }
             }
             catch (Exception ex)
@@ -141,7 +144,6 @@ namespace ImageServer.WebApplication.Models
                    // dp.write(k+":::::"+item+"\n");
 
                 }
-                Notify?.Invoke();
 
 
 

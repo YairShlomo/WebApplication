@@ -10,12 +10,17 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using ImageService;
 
 namespace ImageServer.WebApplication.Models
 {
     public class LogModel
     {
         private ObservableCollection<Log> m_Log;
+        public delegate void NotifyAboutChange();
+
+        public event NotifyAboutChange Notify;
+        Debug_program debug;
         /// <summary>
         /// Initializes a new instance of the <see cref="LogModel"/> class.
         /// </summary>
@@ -25,6 +30,7 @@ namespace ImageServer.WebApplication.Models
             //client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
+            debug = new Debug_program();
         }
         #region Notify Changed
         public event PropertyChangedEventHandler PropertyChanged;
@@ -40,6 +46,7 @@ namespace ImageServer.WebApplication.Models
         /// The client.
         /// </value>
         private WebClient client { get; set; }
+        /*
         public ObservableCollection<Log> Logs
         {
             get
@@ -47,6 +54,7 @@ namespace ImageServer.WebApplication.Models
                 return m_Log;
             }
         }
+        */
         /**  public void setLogs(Log log)
           {
               m_Log.Add(log);
@@ -64,7 +72,6 @@ namespace ImageServer.WebApplication.Models
                 Object thisLock = new Object();
                 //BindingOperations.EnableCollectionSynchronization(logs, thisLock);
                 string[] Args = new string[5];
-
                 CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, Args, "");
                 Console.WriteLine((int)commandRecievedEventArgs.CommandID + "\n");
                 client.Send(commandRecievedEventArgs);
@@ -97,6 +104,11 @@ namespace ImageServer.WebApplication.Models
                             //client.Close();
                             break;
                     }
+                    foreach (Log log in Logs) {
+                      //  debug.write(log.Message);
+                    }
+                   
+                    Notify?.Invoke();
                 }
             }
             catch (Exception ex)
@@ -154,7 +166,7 @@ namespace ImageServer.WebApplication.Models
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Logs")]
-        public ObservableCollection<Log> logs { get; set; }
+        public ObservableCollection<Log> Logs { get; set; }
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Type")]
