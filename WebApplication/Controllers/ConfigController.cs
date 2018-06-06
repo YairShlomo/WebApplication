@@ -11,6 +11,7 @@ namespace ImageServer.WebApplication.Controllers
     public class ConfigController :Controller
     {
         private Debug_program debug;
+        private static string handlerToDelete;
 
         static ConfigModel config = new ConfigModel();
 
@@ -23,7 +24,6 @@ namespace ImageServer.WebApplication.Controllers
         }
 
 
-
         public void Notify()
         {
             Config();
@@ -33,6 +33,28 @@ namespace ImageServer.WebApplication.Controllers
         public ActionResult Config()
         {
             return View(config);
+        }
+
+        // GET: ResumeDeletion
+        public ActionResult ResumeDeletion()
+        {
+            config.CloseHandler(handlerToDelete);
+            return RedirectToAction("Config");
+        }
+        // GET: Confirm
+        public ActionResult Confirm()
+        {
+            return View(config);
+        }
+
+
+        // GET: Config/DeleteHandler/
+        public ActionResult DeleteHandler(string toDeleteHandler)
+        {
+            
+            handlerToDelete = toDeleteHandler;
+            return RedirectToAction("Confirm");
+
         }
     }
 }

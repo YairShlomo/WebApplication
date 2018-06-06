@@ -20,7 +20,7 @@ namespace ImageServer.WebApplication.Models
         public delegate void NotifyAboutChange();
 
         public event NotifyAboutChange Notify;
-        Debug_program debug;
+      //  Debug_program debug;
         /// <summary>
         /// Initializes a new instance of the <see cref="LogModel"/> class.
         /// </summary>
@@ -30,7 +30,7 @@ namespace ImageServer.WebApplication.Models
             //client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
-            debug = new Debug_program();
+           // debug = new Debug_program();
         }
         #region Notify Changed
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,13 +68,14 @@ namespace ImageServer.WebApplication.Models
         {
             try
             {
-                m_Log = new ObservableCollection<Log>();
+               Logs= new ObservableCollection<Log>();
                 Object thisLock = new Object();
                 //BindingOperations.EnableCollectionSynchronization(logs, thisLock);
                 string[] Args = new string[5];
                 CommandRecievedEventArgs commandRecievedEventArgs = new CommandRecievedEventArgs((int)CommandEnum.LogCommand, Args, "");
                 Console.WriteLine((int)commandRecievedEventArgs.CommandID + "\n");
                 client.Send(commandRecievedEventArgs);
+               // debug.write("InitData\n");
             }
             catch (Exception ex)
             {
@@ -88,6 +89,8 @@ namespace ImageServer.WebApplication.Models
         /// <param name="arrivedMessage">The <see cref="CommandRecievedEventArgs"/> instance containing the event data.</param>
         private void ExecuteReceived(CommandRecievedEventArgs arrivedMessage)
         {
+          //  debug.write("ExecuteReceived\n");
+
             try
             {
                 if (arrivedMessage != null)
@@ -105,7 +108,7 @@ namespace ImageServer.WebApplication.Models
                             break;
                     }
                     foreach (Log log in Logs) {
-                      //  debug.write(log.Message);
+                     // debug.write(log.Message);
                     }
                    
                     Notify?.Invoke();
