@@ -118,8 +118,8 @@ namespace ImageServer.WebApplication
                 catch (Exception e)
                 {
                     Console.WriteLine($"excption thrown reciver"+e.Message);
-                    string[] Args = { "2", $"excption thrown reciver" + e.Message };
-                    CommandRecievedEventArgs cre = new CommandRecievedEventArgs((int)CommandEnum.AddLog, Args, null);
+                    string[] Args = { $"excption thrown reciver" + e.Message };
+                    CommandRecievedEventArgs cre = new CommandRecievedEventArgs((int)MessageTypeEnum.ERROR, Args, null);
                     ExecuteReceived?.Invoke(cre);
                     Close();
 

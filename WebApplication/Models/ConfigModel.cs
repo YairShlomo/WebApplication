@@ -26,7 +26,7 @@ namespace ImageServer.WebApplication.Models
         private string m_sourceName;
         private string m_logName;
         //private Debug_program dp;
-
+        
         //private ObservableCollection<string> mHandlers;
         public event PropertyChangedEventHandler PropertyChanged;
         public delegate void NotifyAboutChange();
@@ -43,7 +43,10 @@ namespace ImageServer.WebApplication.Models
             client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
-            
+            path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString();
+
+
+
         }
         #region Notify Changed
 
@@ -107,7 +110,7 @@ namespace ImageServer.WebApplication.Models
                             Update(arrivedMessage);
                             break;
                         case (int)CommandEnum.CloseHandlerCommand:
-                            CloseHandler(arrivedMessage);
+                           // CloseHandler(arrivedMessage);
                             break;
                         default:
                             //client.Close();
@@ -130,7 +133,6 @@ namespace ImageServer.WebApplication.Models
             {
                 //dp.write("yey\n");
                 TcpMessages tcpMessages = JsonConvert.DeserializeObject<TcpMessages>(arrivedMessage.Args[0]);
-
                 OutputDirectory = tcpMessages.Args[0];
                 SourceName = tcpMessages.Args[1];
                 LogName = tcpMessages.Args[2];
@@ -143,12 +145,8 @@ namespace ImageServer.WebApplication.Models
                 foreach(string item in Handlers)
                 {
                    // dp.write(k+":::::"+item+"\n");
-
                 }
                 Notify?.Invoke();
-
-
-
             }
             catch (Exception e)
             {
@@ -183,11 +181,12 @@ namespace ImageServer.WebApplication.Models
             lock (mutexWrite)
             {
                 client.Send(commandRecievedEventArgs);
-
-
             }
         }
+        public string path { get; set; }
+
         //members
+
         [Required]
         [DataType(DataType.Text)]
         public bool Enabled { get; set; }

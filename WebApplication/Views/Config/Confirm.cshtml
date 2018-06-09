@@ -1,11 +1,43 @@
-﻿
+﻿@model ImageServer.WebApplication.Models.ConfigModel
+
 @{
     ViewBag.Title = "Confirm";
 }
 
 <h2>Confirm</h2>
 <h2>Are You Sure You Want To Delete This Handler?</h2>
-@*  <button type="button">Ok</button> *@
-<td>
-    @Html.ActionLink("OK", "ResumeDeletion", "Config")
-</td>
+
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#Ok").click(function () {
+                document.getElementById("Cancel").disabled = true;
+                document.getElementById("Ok").disabled = true;
+                $.post("@Url.Action("ResumeDeletion","Config")");
+
+                window.location = "Config";
+
+            });
+
+
+        });
+    </script>
+</head>
+<body>
+
+    <input type="button" id="Ok" value="Ok" />
+    <input type="button" id="Cancel" value="Cancel" onclick='window.location="Config";' />
+
+</body>
+</html>
+
+
+
+@*<button type="button">Cancel</button>*@
+@*
+    <td>
+        @Html.ActionLink("OK", "ResumeDeletion", "Config")
+
+    </td>*@

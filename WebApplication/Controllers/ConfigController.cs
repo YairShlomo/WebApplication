@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
 namespace ImageServer.WebApplication.Controllers
 {
     public class ConfigController :Controller
@@ -51,10 +50,8 @@ namespace ImageServer.WebApplication.Controllers
         // GET: Config/DeleteHandler/
         public ActionResult HandlerDeletion(string toDeleteHandler)
         {
-            
             handlerToDelete = toDeleteHandler;
             return RedirectToAction("Confirm");
-
         }
     }
 }

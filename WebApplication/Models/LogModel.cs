@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using ImageService;
+using System.Collections.Generic;
 
 namespace ImageServer.WebApplication.Models
 {
@@ -18,6 +19,7 @@ namespace ImageServer.WebApplication.Models
     {
         private ObservableCollection<Log> m_Log;
         public delegate void NotifyAboutChange();
+        public string FilterType { get; set; }
 
         public event NotifyAboutChange Notify;
       //  Debug_program debug;
@@ -30,7 +32,9 @@ namespace ImageServer.WebApplication.Models
             //client.Recieve();
             client.ExecuteReceived += ExecuteReceived;
             InitData();
-           // debug = new Debug_program();
+            // debug = new Debug_program();
+            selectedLogMessages = new List<Log>();
+            FilterType = "";
         }
         #region Notify Changed
         public event PropertyChangedEventHandler PropertyChanged;
@@ -68,7 +72,10 @@ namespace ImageServer.WebApplication.Models
         {
             try
             {
-               Logs= new ObservableCollection<Log>();
+                Logs= new ObservableCollection<Log>();
+                Log newLogEntry = new Log { Type =  "WARNING", Message = "CHECK" };
+                Logs.Insert(0, newLogEntry);
+
                 Object mutexWrite = new Object();
                 //BindingOperations.EnableCollectionSynchronization(logs, mutexWrite);
                 string[] Args = new string[5];
@@ -134,8 +141,7 @@ namespace ImageServer.WebApplication.Models
             {
                 foreach (Log log in JsonConvert.DeserializeObject<ObservableCollection<Log>>(arrivedMessage.Args[0]))
                 {
-                    this.Logs.Add(log);
-                    // setLogs(log);
+                    Logs.Insert(0,log);
                 }
             }
             catch (Exception e)
@@ -145,7 +151,18 @@ namespace ImageServer.WebApplication.Models
                 //MessageBox.Show(e.ToString());
             }
         }
+        public void CheckExistence(Log log)
+        {
+                foreach (Log templog in Logs)
+                {
+                    if (String.Compare(templog.Message,log.Message)==0)
+                    {
+                        return;
+                    }
+                }
+                Logs.Insert(0, log);
 
+        }
         /// <summary>
         /// Adds the log.
         /// </summary>
@@ -159,7 +176,7 @@ namespace ImageServer.WebApplication.Models
                 //MessageTypeEnum foo = (MessageTypeEnum)Enum.ToObject(typeof(MessageTypeEnum), s);
 
                 Log newLogEntry = new Log { Type = (responseObj.Args[0]), Message = responseObj.Args[1] };
-                Logs.Insert(0, newLogEntry);
+                CheckExistence(newLogEntry);
             }
             catch (Exception e)
             {
@@ -168,8 +185,28 @@ namespace ImageServer.WebApplication.Models
                // MessageBox.Show(e.ToString());
             }
         }
+        public void AddToSelected(Log message)
+        {
+            selectedLogMessages.Add(message);
+        }
         //members
-
+       
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "SelectedLogMessages")]
+        private List<Log> selectedLogMessages;
+        public List<Log> SelectedLogMessages
+        {
+            get
+            {
+                if (selectedLogMessages.Count == 0)
+                {
+                    selectedLogMessages.AddRange(Logs);
+                }
+                return selectedLogMessages;
+            }
+            private set { }
+        }
         [Required]
         [DataType(DataType.Text)]
         [Display(Name = "Logs")]

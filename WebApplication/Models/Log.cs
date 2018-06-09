@@ -19,7 +19,7 @@ namespace ImageServer.WebApplication.Models
         [Display(Name = "Message")]
         public string Message { get; set; }
 
-
+       
 
     }
 }

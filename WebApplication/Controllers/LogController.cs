@@ -9,7 +9,7 @@ namespace ImageServer.WebApplication.Controllers
 {
     public class LogController : Controller
     {
-        static LogModel logModel = new LogModel();
+        private static LogModel logModel = new LogModel();
 
         public LogController()
         {
@@ -25,6 +25,32 @@ namespace ImageServer.WebApplication.Controllers
         public ActionResult Logs()
         {
             return View(logModel);
+        }
+        [HttpPost]
+        public ActionResult LogChangeFilter(FormCollection form)
+        {
+            string type = form["typeFilter"].ToString();
+            logModel.FilterType = type;
+            SelectedLogUpdate(type);
+            return RedirectToAction("Logs");
+        }
+        public void SelectedLogUpdate(string type)
+        {
+            if (type != "")
+            {
+                logModel.SelectedLogMessages.Clear();
+                foreach (Log item in logModel.Logs)
+                {
+                    if (item.Type == type)
+                    {
+                        logModel.AddToSelected(item);
+                    }
+                }
+            }
+            else
+            {
+                logModel.SelectedLogMessages.Clear();
+            }
         }
     }
 }
