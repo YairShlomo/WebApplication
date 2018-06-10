@@ -10,7 +10,20 @@ namespace ImageServer.WebApplication.Controllers
 
     public class HomeController : Controller
     {
-
+        static HomeModel home = new HomeModel();
+        public HomeController()
+        {
+            home.Notify -= Notify;
+            home.Notify += Notify;
+        }
+        public void Notify()
+        {
+            Home();
+        }
+        public ActionResult Home()
+        {
+            return View(home);
+        }
         public ActionResult Index()
         {
             return View();
@@ -18,7 +31,7 @@ namespace ImageServer.WebApplication.Controllers
 
         public ActionResult Logs()
         {
-           // ViewBag.Message = "Your application description page.";
+            // ViewBag.Message = "Your application description page.";
 
             return View(new LogModel());
         }
@@ -27,6 +40,11 @@ namespace ImageServer.WebApplication.Controllers
         {
             //ViewBag.Message = "Your Config page.";
             return View(new ConfigModel());
+        }
+        public ActionResult Photos()
+        {
+            //ViewBag.Message = "Your Config page.";
+            return View(new PhotosModel());
         }
     }
 }

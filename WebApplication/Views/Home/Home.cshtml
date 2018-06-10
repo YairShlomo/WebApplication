@@ -1,0 +1,48 @@
+﻿@model ImageServer.WebApplication.Models.HomeModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<h2>Home</h2>
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        @{
+            var txt = "";
+            if (Model.client.Connected)
+            {
+                txt = "The service is enable";
+            }
+            else
+            {
+                txt = "The service is disable";
+            }
+
+        }
+        <h4>@txt</h4>
+        <hr />
+    </div>
+    <table class="table">
+        @{var info = Model.students();}
+        <td>NAME</td>
+        <td>SURNAME</td>
+        <td>ID</td>
+        <tr></tr>
+        <td>@info[0]</td>
+        <td>@info[1]</td>
+        <td>@info[2]</td>
+        <tr></tr>
+        <td>@info[3]</td>
+        <td>@info[4]</td>
+        <td>@info[5]</td>
+    </table>
+    <h6>The number of images in the OUTPUT folder is: @Model.getOutputCount()</h6>
+            }
+
+
