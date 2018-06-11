@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -37,7 +38,7 @@ namespace ImageServer.WebApplication.Models
             client.ExecuteReceived += ExecuteReceived;
             RegularPhotos = new ObservableCollection<string>();
             ThumbnailPhotos = new ObservableCollection<string>();
-
+            ImageRelativePathThumbnail = "~/Views/Photos/hh.bmp";
             //InitData();
 
         }
@@ -78,10 +79,11 @@ namespace ImageServer.WebApplication.Models
         public void AddPhoto(string path)
         {
             //split to regular photo-place[0]. and thumbnail photo-place [1]
-            string[] splitted=  path.Split(';');
+            string[] splitted = path.Split(';');
 
             //add only thumbnail photo -which should be viewed
             RegularPhotos.Add(splitted[0]);
+            System.Diagnostics.Debug.WriteLine(splitted[0] +"\n");
             ThumbnailPhotos.Add(splitted[1]);
 
         }
@@ -89,8 +91,9 @@ namespace ImageServer.WebApplication.Models
         {
             //get index of thubmnail.
             int index =ThumbnailPhotos.IndexOf(path);
-            ThumbnailPhotos.RemoveAt(index);
             RegularPhotos.RemoveAt(index);
+            ThumbnailPhotos.RemoveAt(index);
+
 
         }
         public void SendDeletePhoto(string path)
@@ -105,6 +108,10 @@ namespace ImageServer.WebApplication.Models
 
             }
         }
+        [Required]
+        [DataType(DataType.ImageUrl)]
+        [Display(Name = "ImageRelativePathThumbnail")]
+        public string ImageRelativePathThumbnail { get; set; }
 
     }
 }

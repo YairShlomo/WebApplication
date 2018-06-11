@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -71,6 +72,7 @@
     <Compile Include="Commands\CloseHandlerCommand.cs" />
     <Compile Include="Commands\LogCommand.cs" />
     <Compile Include="Commands\GetConfigCommand.cs" />
+    <Compile Include="Commands\DeleteFileCommand.cs" />
     <Compile Include="Communication\ClientHandler.cs" />
     <Compile Include="Communication\IClientHandler.cs" />
     <Compile Include="Communication\ISServer.cs" />
@@ -80,6 +82,7 @@
     <Compile Include="Controller\Handlers\IDirectoryHandler.cs" />
     <Compile Include="Controller\IImageController.cs" />
     <Compile Include="Controller\ImageController.cs" />
+    <Compile Include="Debug_program.cs" />
     <Compile Include="ImageService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -102,7 +105,9 @@
     <Compile Include="TcpMessages.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="bin\Debug\ImageService.exe.config" />
     <None Include="bin\Debug\ImageService.InstallLog" />
     <None Include="bin\Debug\ImageService.InstallState" />

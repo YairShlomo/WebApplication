@@ -30,7 +30,7 @@ namespace ImageService.Controller
             CommandEnum l = CommandEnum.LogCommand;
             //CommandEnum a = CommandEnum.AddLog;
             CommandEnum c = CommandEnum.CloseCommand;
-            CommandEnum ch = CommandEnum.CloseHandlerCommand;
+            CommandEnum d = CommandEnum.DeleteFileCommand;
           //  CommandEnum cc = CommandEnum.CloseClient;
             commands = new Dictionary<int, ICommand>()
             {
@@ -39,7 +39,9 @@ namespace ImageService.Controller
                  {(int)g, new GetConfigCommand()},
                  { (int)l, new LogCommand(loggingService)},
                  //{ (int)a, new AddLog(m_modal)},
-                  {(int)c, new CloseCommand(m_modal)}
+                  {(int)c, new CloseCommand(m_modal)},
+                  {(int)d, new DeleteFileCommand(m_modal)},
+
              //  { (int)ch, new CloseHandlerCommand(imageServer)}
                 // { (int)cc, new CloseClient()}
              

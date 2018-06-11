@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Infrastructure
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService.Logging", "..\ImageService\ImageServer.Logging\ImageService.Logging.csproj", "{6433EAE9-179E-4B63-92F9-7E124E8670CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService", "..\ImageService\ImageService\ImageService.csproj", "{93CB7844-A205-4403-87BB-D5F22FD50D34}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageService", "ImageService\ImageService.csproj", "{93CB7844-A205-4403-87BB-D5F22FD50D34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
