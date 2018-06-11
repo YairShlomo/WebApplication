@@ -53,21 +53,17 @@ namespace ImageServer.WebApplication.Models
             {
                 if (arrivedMessage != null)
                 {
-                    switch (arrivedMessage.CommandID)
+                    if (Int32.Parse(arrivedMessage.Args[0]) == (int)CommandEnum.NewFileCommand)
                     {
-                        case (int)CommandEnum.NewFileCommand:
-                            AddPhoto(arrivedMessage.Args[0]);
-                            break;
-                        case (int)CommandEnum.DeleteFileCommand:
-                            DeletePhoto(arrivedMessage.Args[0]);
-
-                            break;
-                        default:
-                            //client.Close();
-                            break;
+                        AddPhoto(arrivedMessage.Args[1]);
+                    }
+                    else if (arrivedMessage.CommandID == (int)CommandEnum.DeleteFileCommand)
+                    {
+                        DeletePhoto(arrivedMessage.Args[0]);
                     }
 
-                    //Notify?.Invoke();
+
+                    Notify?.Invoke();
                 }
             }
             catch (Exception ex)
