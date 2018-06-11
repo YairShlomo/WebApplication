@@ -760,3 +760,16 @@ Affected parameters are:
    logtoconsole = 
    logfile = C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\bin\Debug\ImageService.InstallLog
    assemblypath = C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\bin\Debug\ImageService.exe
+Installing assembly 'C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.InstallLog
+   assemblypath = C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.exe
+Installing service ImageService...
+Service ImageService has been successfully installed.
+Creating EventLog source ImageService in log Application...
+Committing assembly 'C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.InstallLog
+   assemblypath = C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\bin\Debug\ImageService.exe

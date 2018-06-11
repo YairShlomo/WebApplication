@@ -21,21 +21,26 @@ namespace ImageService.Modal
         private int m_thumbnailSize;              // The Size Of The Thumbnail Size
         private static Regex r = new Regex(":"); //we init this once so that if the function is repeatedly called
                                                  //it isn't stressing the garbage man
-        //Debug_program debug = new Debug_program();
+        string returnVal;
+        string finalTargetPath;
         #endregion
+        Debug_program db;
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageServiceModal"/> class.
         /// </summary>
         public ImageServiceModal()
         {
+            db = new Debug_program();
+            //m_OutputFolder = ConfigurationManager.AppSettings["OutputDir"];
             string dummy = ConfigurationManager.AppSettings["OutputDir"];
-            string dirName = AppDomain.CurrentDomain.BaseDirectory;
-            FileInfo fileInfo = new FileInfo(dirName);
-            DirectoryInfo parentDir = fileInfo.Directory.Parent.Parent.Parent.Parent;
-            string parentDirName = parentDir.FullName;
-            m_OutputFolder = parentDirName + dummy;
-            //debug.write(m_OutputFolder);
-            // static string fileName = HttpContext.Current.ApplicationInstance.Server.MapPath("~bin");
+            db.write(dummy + "\n");
+            //string dirName = AppDomain.CurrentDomain.BaseDirectory;
+            //FileInfo fileInfo = new FileInfo(dirName);
+            //DirectoryInfo parentDir = fileInfo.Directory.Parent.Parent.Parent.Parent;
+            //string parentDirName = parentDir.FullName;
+            //m_OutputFolder = parentDirName + dummy;
+            m_OutputFolder = dummy;
+            db.write(m_OutputFolder + "\n");
             try
             {
                 m_thumbnailSize = Int32.Parse(ConfigurationManager.AppSettings["ThumbnailSize"]);
@@ -122,12 +127,16 @@ namespace ImageService.Modal
                     DirectoryInfo dirThumbnail = Directory.CreateDirectory(thumbnailPath + "\\" + yearOfCreation + "\\" + monthOfCreation);
                     string pathExtension = Path.GetExtension(targetPath);
                     targetPath = IsFileExist(targetPath, pathExtension);
-                    File.Move(path, targetPath);                   
+                    File.Move(path, targetPath);
+                    finalTargetPath = targetPath.ToString();
+
                     Image thumbImage = Image.FromFile(targetPath);
                     thumbImage = thumbImage.GetThumbnailImage(m_thumbnailSize, m_thumbnailSize, () => false, IntPtr.Zero);
-                    thumbImage.Save(IsFileExist(targetPathThumbnail.ToString() + "\\" + fullNamePath, pathExtension));
+                    string finalTargetPathThumb = IsFileExist(targetPathThumbnail.ToString() + "\\" + fullNamePath, pathExtension);
+                    thumbImage.Save(finalTargetPathThumb);
                     result = true;
-                    return targetPath.ToString() + "\\" + fullNamePath;
+                    returnVal = finalTargetPathThumb + ';' + finalTargetPath;
+                    return returnVal;
                 }
                 else
                 {
@@ -141,8 +150,11 @@ namespace ImageService.Modal
             }
             catch (Exception e)
             {
+                returnVal = finalTargetPath + ';' ;
+
                 result = false;
-                return e.ToString();
+                //return e.ToString()+"njnjnj";
+                return returnVal;
             }
 
         }
@@ -155,7 +167,6 @@ namespace ImageService.Modal
         /// <returns></returns>
         public string IsFileExist(string targetPath, string pathExtension)
         {
-
            // Debug_program debug = new Debug_program();
             int counter = 1;
             while (File.Exists(targetPath))
@@ -186,6 +197,7 @@ namespace ImageService.Modal
                 return DateTime.Parse(dateTaken);
             }
         }
+
         public string DeleteFile(string path, out bool result)
         {
             try
@@ -200,7 +212,7 @@ namespace ImageService.Modal
                 result = false;
                 return "failed remove photo" + path;
             }
-
+            
         }
     }
 }

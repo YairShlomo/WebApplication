@@ -10,6 +10,7 @@ namespace ImageServer.WebApplication.Controllers
     public class PhotosController : Controller
     {
         static PhotosModel photosModel = new PhotosModel();
+        static string PhotoToDelete;
         // GET: Photos
         public PhotosController()
         {
@@ -24,5 +25,23 @@ namespace ImageServer.WebApplication.Controllers
         {
             return View();
         }
+
+        public ActionResult ViewPhotos(string fullUrl)
+        {
+            Photo photo = new Photo(fullUrl);
+            return View(photo);
+        }
+        public ActionResult ResumeDeletion(string fullUrl)
+        {
+            photosModel.DeletePhoto(fullUrl);
+            return RedirectToAction("Photos");
+        }
+        public ActionResult PhotoDeleteion(string toDeletePhoto)
+        {
+            PhotoToDelete = toDeletePhoto;
+            return RedirectToAction("Confirm");
+        }
+       
+
     }
 }

@@ -28,8 +28,9 @@ namespace ImageServer.WebApplication.Models
         /// The client.
         /// </value>
         private WebClient client { get; set; }
-        private ObservableCollection<string> RegularPhotos { get; set; }
-        private ObservableCollection<string> ThumbnailPhotos { get; set; }
+        public ObservableCollection<string> RegularPhotos { get; set; }
+        public ObservableCollection<string> ThumbnailPhotos { get; set; }
+        public List<Photo> PhotoList { get; set; }
 
         public PhotosModel()
         {
@@ -38,10 +39,8 @@ namespace ImageServer.WebApplication.Models
             client.ExecuteReceived += ExecuteReceived;
             RegularPhotos = new ObservableCollection<string>();
             ThumbnailPhotos = new ObservableCollection<string>();
-            ImageRelativePathThumbnail = "~/Views/Photos/hh.bmp";
-            //InitData();
-
-        }
+            ImageList = new List<Photo>();
+    }
 
         /// <summary>
         /// Executes the received.
@@ -82,18 +81,25 @@ namespace ImageServer.WebApplication.Models
             string[] splitted = path.Split(';');
 
             //add only thumbnail photo -which should be viewed
-            RegularPhotos.Add(splitted[0]);
-            System.Diagnostics.Debug.WriteLine(splitted[0] +"\n");
-            ThumbnailPhotos.Add(splitted[1]);
-
+            //RegularPhotos.Add(splitted[1]);
+           // ThumbnailPhotos.Add(splitted[0]);
+            Photo photo = new Photo(splitted[0]);
+            PhotoList.Add(photo);
         }
         public void DeletePhoto(string path)
         {
             //get index of thubmnail.
-            int index =ThumbnailPhotos.IndexOf(path);
-            RegularPhotos.RemoveAt(index);
-            ThumbnailPhotos.RemoveAt(index);
-
+           // int index =ThumbnailPhotos.IndexOf(path);
+           // string pathThumb = ThumbnailPhotos[index];
+           // RegularPhotos.RemoveAt(index);
+           // ThumbnailPhotos.RemoveAt(index);
+            foreach (Photo photo in PhotoList)
+            {
+                if (string.Compare(photo.ImageFullThumbnailUrl,path)==0)
+                {
+                    PhotoList.Remove(photo);
+                }
+            }
 
         }
         public void SendDeletePhoto(string path)
