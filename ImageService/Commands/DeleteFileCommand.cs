@@ -24,7 +24,7 @@ namespace ImageService.Commands
         public string Execute(string[] args, out bool result, TcpClient client = null)
         {
             return m_modal.DeleteFile(args[0], out result);
-          
+
         }
     }
 }

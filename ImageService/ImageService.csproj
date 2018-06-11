@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -56,6 +55,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -70,9 +70,9 @@
     <Compile Include="Commands\AddLogCommand.cs" />
     <Compile Include="Commands\CloseCommand.cs" />
     <Compile Include="Commands\CloseHandlerCommand.cs" />
+    <Compile Include="Commands\DeleteFileCommand.cs" />
     <Compile Include="Commands\LogCommand.cs" />
     <Compile Include="Commands\GetConfigCommand.cs" />
-    <Compile Include="Commands\DeleteFileCommand.cs" />
     <Compile Include="Communication\ClientHandler.cs" />
     <Compile Include="Communication\IClientHandler.cs" />
     <Compile Include="Communication\ISServer.cs" />

@@ -25,8 +25,6 @@ namespace ImageService.Communication
         object mutexWrite = new object();
         BinaryReader reader;
         BinaryWriter writer;
-        private Debug_program dp;
-
         /// <summary>
         /// ClientHandler constructor.
         /// </summary>
@@ -38,7 +36,7 @@ namespace ImageService.Communication
             this.Logging = logging;
             this.Logging.MessageRecieved += send;
             Console.WriteLine("ClientHandlerconstructor");
-            dp = new Debug_program();
+
         }
         private bool isRunning= false;
         public bool IsRunning  // read-write instance property
@@ -73,13 +71,12 @@ namespace ImageService.Communication
                         NetworkStream stream = client.GetStream();
                         reader = new BinaryReader(stream);
                         writer = new BinaryWriter(stream);
+
                         while (isRunning)
                         {
                             Console.WriteLine("chbefore reading");
-                            dp.write("chbefore reading");
                             string commandLine = reader.ReadString();
                             Logging.Log("ClientHandler got command: " + commandLine, MessageTypeEnum.INFO);
-                            dp.write("ClientHandler got command: " + commandLine);
                             CommandRecievedEventArgs commandRecievedEventArgs = JsonConvert.DeserializeObject<CommandRecievedEventArgs>(commandLine);
                             if (commandRecievedEventArgs.CommandID == (int)CommandEnum.CloseClient)
                             {
@@ -90,10 +87,8 @@ namespace ImageService.Communication
                             }
                            // Console.WriteLine("Got command: {0}", commandLine);
                             bool r;
-           
                             string result = imageController.ExecuteCommand((int)commandRecievedEventArgs.CommandID,
                             commandRecievedEventArgs.Args, out r);
-                            dp.write(result);
                             //Console.WriteLine("chExecutedCommand"+ (int)commandRecievedEventArgs.CommandID);
                             // string result = handleCommand(commandRecievedEventArgs);
                             // Mutex.WaitOne();
@@ -107,7 +102,6 @@ namespace ImageService.Communication
                     }
                     catch (Exception e)
                     {
-                       
                         Console.WriteLine($"excption thrown senderch" + e.Message);
                         clients.Remove(client);
                         Logging.Log(e.ToString(), MessageTypeEnum.ERROR);
@@ -130,10 +124,9 @@ namespace ImageService.Communication
                 if (isRunning)
                 {
                     MessageTypeEnum s = dirArgs.Status;
-                    string[] Args = { Convert.ToString(dirArgs.Status), dirArgs.Message };
+                    string[] Args = { Convert.ToString((int)dirArgs.Status), dirArgs.Message };
                     CommandRecievedEventArgs cre = new CommandRecievedEventArgs((int)CommandEnum.AddLog, Args, null);
                     string jsonCommand = JsonConvert.SerializeObject(cre);
-                    dp.write(jsonCommand+"\n");
                     writer.Write(jsonCommand);
                 }
             }
