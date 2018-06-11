@@ -23,7 +23,7 @@ namespace ImageServer.WebApplication.Controllers
         }
         public ActionResult Photos()
         {
-            return View();
+            return View(photosModel);
         }
 
         public ActionResult ViewPhotos(string fullUrl)
@@ -41,7 +41,5 @@ namespace ImageServer.WebApplication.Controllers
             PhotoToDelete = toDeletePhoto;
             return RedirectToAction("Confirm");
         }
-       
-
     }
 }

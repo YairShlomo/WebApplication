@@ -24,23 +24,23 @@ namespace ImageService.Modal
         string returnVal;
         string finalTargetPath;
         #endregion
-        Debug_program db;
+        //Debug_program db;
         /// <summary>
         /// Initializes a new instance of the <see cref="ImageServiceModal"/> class.
         /// </summary>
         public ImageServiceModal()
         {
-            db = new Debug_program();
+           // db = new Debug_program();
             //m_OutputFolder = ConfigurationManager.AppSettings["OutputDir"];
             string dummy = ConfigurationManager.AppSettings["OutputDir"];
-            db.write(dummy + "\n");
-            //string dirName = AppDomain.CurrentDomain.BaseDirectory;
-            //FileInfo fileInfo = new FileInfo(dirName);
-            //DirectoryInfo parentDir = fileInfo.Directory.Parent.Parent.Parent.Parent;
-            //string parentDirName = parentDir.FullName;
-            //m_OutputFolder = parentDirName + dummy;
-            m_OutputFolder = dummy;
-            db.write(m_OutputFolder + "\n");
+            //db.write(dummy + "\n");
+            string dirName = AppDomain.CurrentDomain.BaseDirectory;
+            FileInfo fileInfo = new FileInfo(dirName);
+            DirectoryInfo parentDir = fileInfo.Directory.Parent.Parent.Parent.Parent;
+            string parentDirName = parentDir.FullName;
+            m_OutputFolder = parentDirName + dummy;
+           // m_OutputFolder = dummy;
+           // db.write(m_OutputFolder + "\n");
             try
             {
                 m_thumbnailSize = Int32.Parse(ConfigurationManager.AppSettings["ThumbnailSize"]);
@@ -92,9 +92,9 @@ namespace ImageService.Modal
                 string strResult;
                 if (!((attr & FileAttributes.Directory) == FileAttributes.Directory))
                 {
-                   // Debug_program debug = new Debug_program();
+                    // Debug_program debug = new Debug_program();
                     //  debug.write("addfile");
-                   // debug.write("addfile");
+                    // debug.write("addfile");
                     //create output directory if doesnt exist
                     Directory.CreateDirectory(OutputFolder);
                     File.SetAttributes(OutputFolder, FileAttributes.Hidden);
@@ -150,7 +150,7 @@ namespace ImageService.Modal
             }
             catch (Exception e)
             {
-                returnVal = finalTargetPath + ';' ;
+                returnVal = finalTargetPath + ';';
 
                 result = false;
                 //return e.ToString()+"njnjnj";
@@ -167,7 +167,7 @@ namespace ImageService.Modal
         /// <returns></returns>
         public string IsFileExist(string targetPath, string pathExtension)
         {
-           // Debug_program debug = new Debug_program();
+            // Debug_program debug = new Debug_program();
             int counter = 1;
             while (File.Exists(targetPath))
             {
@@ -212,9 +212,9 @@ namespace ImageService.Modal
                 result = false;
                 return "failed remove photo" + path;
             }
-            
+
         }
     }
 }
-    
+
 

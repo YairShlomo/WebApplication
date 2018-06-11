@@ -113,7 +113,6 @@ C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\Image
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\bin\Debug\ImageServer.Logging.pdb
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\bin\Debug\Newtonsoft.Json.xml
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\bin\Debug\Prism.xml
-C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.csprojResolveAssemblyReference.cache
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.ImageService.resources
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.ProjectInstaller.resources
 C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.csproj.GenerateResource.Cache
@@ -151,3 +150,4 @@ C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageServi
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.csproj.CopyComplete
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.exe
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.pdb
+C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.csprojResolveAssemblyReference.cache

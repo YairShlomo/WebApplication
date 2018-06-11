@@ -39,7 +39,7 @@ namespace ImageServer.WebApplication.Models
             client.ExecuteReceived += ExecuteReceived;
             RegularPhotos = new ObservableCollection<string>();
             ThumbnailPhotos = new ObservableCollection<string>();
-            ImageList = new List<Photo>();
+            PhotoList = new List<Photo>();
     }
 
         /// <summary>
