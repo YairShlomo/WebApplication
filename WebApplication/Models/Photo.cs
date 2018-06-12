@@ -27,7 +27,7 @@ namespace ImageServer.WebApplication.Models
 
                 strDirName = imageUrl.Substring(intLocation, intLength - intLocation);
 
-                ImageRelativePathThumbnail = @"~\" + strDirName;
+                ImageRelativePathThumbnail = @"~\images\" + strDirName;
                 ImageRelativePath = ImageRelativePathThumbnail.Replace(@"Thumbnails\", string.Empty);
             }
             catch (Exception e)

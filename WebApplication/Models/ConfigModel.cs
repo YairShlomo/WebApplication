@@ -30,7 +30,9 @@ namespace ImageServer.WebApplication.Models
         //private ObservableCollection<string> mHandlers;
         public event PropertyChangedEventHandler PropertyChanged;
         public delegate void NotifyAboutChange();
+        public delegate void NotifyAboutDelete();
 
+        public event NotifyAboutDelete NotifyDelete;
         public event NotifyAboutChange Notify;
         Object mutexWrite;
 
@@ -110,7 +112,8 @@ namespace ImageServer.WebApplication.Models
                             Update(arrivedMessage);
                             break;
                         case (int)CommandEnum.CloseHandlerCommand:
-                           // CloseHandler(arrivedMessage);
+                            CloseHandler(arrivedMessage);
+                            NotifyDelete?.Invoke();
                             break;
                         default:
                             //client.Close();

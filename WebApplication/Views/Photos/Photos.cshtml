@@ -18,7 +18,6 @@
     <h2>Photos</h2>
 
     <div class="container" id="tourpackages-carousel">
-
         <div class="row">
                 @foreach(var item in Model.PhotoList)
                 {
@@ -30,14 +29,13 @@
                             <h4>@item.Name</h4>
                             <p>Year: @item.Year Month: @item.Month</p>
                             <p>
-                                <a href="@Url.Action("PhotosViewer", new { fullUrl = item.ImageFullUrl })" id="btnView" class="btn btn-info btn-xs" role="button">View</a>
-                                <a href="@Url.Action("PhotosDelete", new { fullUrl = item.ImageFullUrl })" id="btnDelete" class="btn btn-danger btn-xs" role="button">Delete</a>
+                                <a href="@Url.Action("ViewPhoto", new { fullUrl = item.ImageFullUrl })" id="btnView" class="btn btn-info btn-xs" role="button">View</a>
+                                <a href="@Url.Action("ConfirmImage", new { toDeletePhoto = item.ImageFullUrl })" id="btnDelete" class="btn btn-danger btn-xs" role="button">Delete</a>
                             </p>
                         </div>
                     </div>
                 </div>
-                }
-            
+                }            
         </div>
     </div>
 

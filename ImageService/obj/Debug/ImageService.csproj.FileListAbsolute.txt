@@ -150,4 +150,3 @@ C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageServi
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.csproj.CopyComplete
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.exe
 C:\Users\yair144\Documents\Visual Studio 2017\Projects\WebApplication\ImageService\obj\Debug\ImageService.pdb
-C:\Users\gal\Documents\Visual Studio 2015\Projects\advance2\WebApplication\ImageService\obj\Debug\ImageService.csprojResolveAssemblyReference.cache

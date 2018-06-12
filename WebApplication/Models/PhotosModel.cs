@@ -84,18 +84,22 @@ namespace ImageServer.WebApplication.Models
         }
         public void DeletePhoto(string path)
         {
+            Photo photo1 = null;
             //get index of thubmnail.
-           // int index =ThumbnailPhotos.IndexOf(path);
-           // string pathThumb = ThumbnailPhotos[index];
-           // RegularPhotos.RemoveAt(index);
-           // ThumbnailPhotos.RemoveAt(index);
-            foreach (Photo photo in PhotoList)
-            {
-                if (string.Compare(photo.ImageFullThumbnailUrl,path)==0)
-                {
-                    PhotoList.Remove(photo);
-                }
-            }
+            // int index =ThumbnailPhotos.IndexOf(path);
+            // string pathThumb = ThumbnailPhotos[index];
+            // RegularPhotos.RemoveAt(index);
+            // ThumbnailPhotos.RemoveAt(index);
+             foreach (Photo photo in PhotoList)
+             {
+                 if (string.Compare(photo.ImageFullUrl,path)==0)
+                 {
+                    photo1 = photo;
+                 }
+             }
+            PhotoList.Remove(photo1);
+            //PhotoList.Clear();
+            Notify?.Invoke();
 
         }
         public void SendDeletePhoto(string path)
@@ -110,7 +114,7 @@ namespace ImageServer.WebApplication.Models
 
             }
         }
-      /**  [Required]
+      /** [Required]
         [DataType(DataType.ImageUrl)]
         [Display(Name = "ImageRelativePathThumbnail")]
         public string ImageRelativePathThumbnail { get; set; }**/

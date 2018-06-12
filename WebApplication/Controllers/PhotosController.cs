@@ -26,20 +26,23 @@ namespace ImageServer.WebApplication.Controllers
             return View(photosModel);
         }
 
-        public ActionResult ViewPhotos(string fullUrl)
+        public ActionResult ViewPhoto(string fullUrl)
         {
             Photo photo = new Photo(fullUrl);
             return View(photo);
+            //return RedirectToAction("ViewPhoto");
         }
         public ActionResult ResumeDeletion(string fullUrl)
         {
             photosModel.DeletePhoto(fullUrl);
             return RedirectToAction("Photos");
         }
-        public ActionResult PhotoDeleteion(string toDeletePhoto)
+        public ActionResult ConfirmImage(string toDeletePhoto)
         {
             PhotoToDelete = toDeletePhoto;
-            return RedirectToAction("Confirm");
+            Photo photo = new Photo(toDeletePhoto);
+            return View(photo);
+            //return RedirectToAction("Confirm");
         }
     }
 }

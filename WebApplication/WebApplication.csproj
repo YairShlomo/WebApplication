@@ -267,8 +267,9 @@
     <Content Include="Views\Config\Confirm.cshtml" />
     <Content Include="Views\Photos\Photos.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
-    <Content Include="Views\Photos\Confirm.cshtml" />
+    <Content Include="Views\Photos\ConfirmImage.cshtml" />
     <Content Include="Views\Photos\ViewPhoto.cshtml" />
+    <Content Include="Views\Photos\View.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

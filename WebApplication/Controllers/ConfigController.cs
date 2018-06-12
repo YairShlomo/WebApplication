@@ -13,11 +13,11 @@ namespace ImageServer.WebApplication.Controllers
         private static string handlerToDelete;
 
         static ConfigModel config = new ConfigModel();
-
+        private bool deletedHandler = false;
         public ConfigController()
         {
-            //debug = new Debug_program();
-           // debug.write("ConfigController\n");
+            config.NotifyDelete -= NotifyDel;
+            config.NotifyDelete += NotifyDel;
             config.Notify -= Notify;
             config.Notify += Notify;
         }
@@ -38,6 +38,10 @@ namespace ImageServer.WebApplication.Controllers
         public ActionResult ResumeDeletion()
         {
             config.CloseHandler(handlerToDelete);
+            while (!deletedHandler)
+            {
+
+            }            
             return RedirectToAction("Config");
         }
         // GET: Confirm
@@ -52,6 +56,10 @@ namespace ImageServer.WebApplication.Controllers
         {
             handlerToDelete = toDeleteHandler;
             return RedirectToAction("Confirm");
+        }
+        public void NotifyDel()
+        {
+            deletedHandler = true;
         }
     }
 }
