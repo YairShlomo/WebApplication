@@ -143,6 +143,7 @@ namespace ImageServer.WebApplication.Models
                 {
                     Logs.Insert(0,log);
                 }
+
             }
             catch (Exception e)
             {

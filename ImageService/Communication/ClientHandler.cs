@@ -124,8 +124,12 @@ namespace ImageService.Communication
                 if (isRunning)
                 {
                     MessageTypeEnum s = dirArgs.Status;
+                    CommandRecievedEventArgs cre;
                     string[] Args = { Convert.ToString((int)dirArgs.Status), dirArgs.Message };
-                    CommandRecievedEventArgs cre = new CommandRecievedEventArgs((int)CommandEnum.AddLog, Args, null);
+                    if(dirArgs.Message.Contains("Add File"))
+                        cre = new CommandRecievedEventArgs((int)CommandEnum.NewFileCommand, Args, null);
+                    else
+                        cre = new CommandRecievedEventArgs((int)CommandEnum.AddLog, Args, null);
                     string jsonCommand = JsonConvert.SerializeObject(cre);
                     writer.Write(jsonCommand);
                 }

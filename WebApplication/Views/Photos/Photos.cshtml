@@ -20,9 +20,7 @@
     <div class="container" id="tourpackages-carousel">
 
         <div class="row">
-            @if (!Model.PhotoList.Any())
-            {
-                foreach (var item in Model.PhotoList)
+                @foreach(var item in Model.PhotoList)
                 {
                 <div class="col-xs-18 col-sm-6 col-md-3">
 
@@ -39,7 +37,7 @@
                     </div>
                 </div>
                 }
-            }
+            
         </div>
     </div>
 

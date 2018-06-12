@@ -53,7 +53,7 @@ namespace ImageServer.WebApplication.Models
             {
                 if (arrivedMessage != null)
                 {
-                    if (Int32.Parse(arrivedMessage.Args[0]) == (int)CommandEnum.NewFileCommand)
+                    if (arrivedMessage.CommandID == (int)CommandEnum.NewFileCommand)
                     {
                         AddPhoto(arrivedMessage.Args[1]);
                     }
@@ -79,7 +79,7 @@ namespace ImageServer.WebApplication.Models
             //add only thumbnail photo -which should be viewed
             //RegularPhotos.Add(splitted[1]);
            // ThumbnailPhotos.Add(splitted[0]);
-            Photo photo = new Photo(splitted[0]);
+            Photo photo = new Photo(splitted[1]);
             PhotoList.Add(photo);
         }
         public void DeletePhoto(string path)
@@ -110,10 +110,10 @@ namespace ImageServer.WebApplication.Models
 
             }
         }
-        [Required]
+      /**  [Required]
         [DataType(DataType.ImageUrl)]
         [Display(Name = "ImageRelativePathThumbnail")]
-        public string ImageRelativePathThumbnail { get; set; }
+        public string ImageRelativePathThumbnail { get; set; }**/
 
     }
 }

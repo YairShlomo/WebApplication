@@ -39,8 +39,8 @@ namespace ImageServer.WebApplication.Models
         /// </summary>
         public ConfigModel()
         {
-            client = WebClient.Instance;
-            client.Recieve();
+            client = WebClient.Instance;          
+            
             client.ExecuteReceived += ExecuteReceived;
             InitData();
             path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData).ToString();

@@ -135,7 +135,7 @@ namespace ImageService.Modal
                     string finalTargetPathThumb = IsFileExist(targetPathThumbnail.ToString() + "\\" + fullNamePath, pathExtension);
                     thumbImage.Save(finalTargetPathThumb);
                     result = true;
-                    returnVal = finalTargetPathThumb + ';' + finalTargetPath;
+                    returnVal = "Add File" +';'+finalTargetPathThumb + ';' + finalTargetPath;
                     return returnVal;
                 }
                 else
